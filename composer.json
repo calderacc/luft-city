@@ -55,7 +55,7 @@
         "symfony/web-link": "^4.0",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "^4.0",
-        "whiteoctober/breadcrumbs-bundle": "^1.4"
+        "mhujer/breadcrumbs-bundle": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0",

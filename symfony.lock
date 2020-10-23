@@ -221,6 +221,9 @@
     "maxh/php-nominatim": {
         "version": "1.2.3"
     },
+    "mhujer/breadcrumbs-bundle": {
+        "version": "1.5.2"
+    },
     "michelf/php-markdown": {
         "version": "1.8.0"
     },
@@ -836,9 +839,6 @@
     },
     "webmozart/assert": {
         "version": "1.3.0"
-    },
-    "whiteoctober/breadcrumbs-bundle": {
-        "version": "1.4.3"
     },
     "willdurand/geocoder": {
         "version": "4.2.0"

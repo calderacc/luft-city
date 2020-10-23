@@ -31,6 +31,6 @@ return [
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
     Sonata\IntlBundle\SonataIntlBundle::class => ['all' => true],
     Flagception\Bundle\FlagceptionBundle\FlagceptionBundle::class => ['all' => true],
-    WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
+    WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle::class => ['all' => true],
 ];
