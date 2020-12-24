@@ -2,23 +2,19 @@
 
 namespace App\Analysis\FireworksAnalysis;
 
-use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
+use App\Pollution\DataFinder\FinderInterface;
 
 abstract class AbstractFireworksAnalysis implements FireworksAnalysisInterface
 {
-    /** @var float $minSlope */
-    protected $minSlope = 10.0;
+    protected float $minSlope = 10.0;
 
-    /** @var float $maxSlope */
-    protected $maxSlope = 5000.0;
+    protected float $maxSlope = 5000.0;
 
-    /** @var PaginatedFinderInterface $finder */
-    protected $finder;
+    protected FinderInterface $finder;
 
-    /** @var FireworksModelFactoryInterface $fireworksModelFactory */
-    protected $fireworksModelFactory;
+    protected FireworksModelFactoryInterface $fireworksModelFactory;
 
-    public function __construct(PaginatedFinderInterface $finder, FireworksModelFactoryInterface $fireworksModelFactory)
+    public function __construct(FinderInterface $finder, FireworksModelFactoryInterface $fireworksModelFactory)
     {
         $this->finder = $finder;
         $this->fireworksModelFactory = $fireworksModelFactory;

@@ -51,9 +51,7 @@ class KomfortofenAnalysis extends AbstractKomfortofenAnalysis
         $query = new \Elastica\Query($boolQuery);
         $query->addAggregation($histogram);
 
-        $results = $this->finder->findPaginated($query);
-
-        $buckets = $results->getAdapter()->getAggregations();
+        $buckets = $this->finder->findAggregations($query);
 
         return $this->komfortofenModelFactory->convert($buckets['histogram_agg']['buckets']);
     }

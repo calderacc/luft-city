@@ -3,16 +3,16 @@
 namespace App\Analysis\KomfortofenAnalysis;
 
 use App\Entity\Data;
+use App\Pollution\DataFinder\DataConverterInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class KomfortofenModelFactory implements KomfortofenModelFactoryInterface
 {
-    /** @var RegistryInterface $registry */
-    protected $registry;
+    protected DataConverterInterface $dataConverter;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(DataConverterInterface $dataConverter)
     {
-        $this->registry = $registry;
+        $this->dataConverter = $dataConverter;
     }
 
     public function convert(array $buckets): array
@@ -24,7 +24,7 @@ class KomfortofenModelFactory implements KomfortofenModelFactoryInterface
 
             foreach ($bucket['top_hits_agg']['hits']['hits'] as $hit) {
                 /** @var Data $data */
-                $data = $this->registry->getRepository(Data::class)->find(intval($hit['_id']));
+                $data = $this->dataConverter->convertArray($hit['_source']);
 
                 $resultList[] = new KomfortofenModel($data->getStation(), $data, $slope);
             }

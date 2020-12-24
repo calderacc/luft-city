@@ -38,7 +38,7 @@
                                 <a href="{{ path('station', { stationCode: ofen.station.stationCode }) }}">
                                     {{ ofen.station.stationCode }}
                                 </a>
-                                {% if ofen.station.city %}
+                                {% if false and ofen.station.city %}
                                     <a href="{{ path('show_city', { citySlug: ofen.station.city.slug }) }}" title="Zeige weitere Luftmessstationen aus {{ ofen.station.city.name }}">
                                         <small class="text-muted">
                                             {{ ofen.station.city.name }}

@@ -50,7 +50,7 @@ class PollutionDataFactory extends AbstractPollutionDataFactory
                 }
             }
         }
-        
+
         return $this->dataList->getList();
     }
 

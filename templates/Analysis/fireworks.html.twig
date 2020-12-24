@@ -42,7 +42,7 @@
                                 <a href="{{ path('station', { stationCode: firework.station.stationCode }) }}">
                                     {{ firework.station.stationCode }}
                                 </a>
-                                {% if firework.station.city %}
+                                {% if false and firework.station.city %}
                                     <a href="{{ path('show_city', { citySlug: firework.station.city.slug }) }}" title="Zeige weitere Luftmessstationen aus {{ firework.station.city.name }}">
                                         <small class="text-muted">
                                             {{ firework.station.city.name }}

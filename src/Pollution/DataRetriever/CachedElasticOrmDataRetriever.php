@@ -9,7 +9,7 @@ use App\Pollution\DataCache\KeyGenerator;
 use Caldera\GeoBasic\Coord\CoordInterface;
 use FOS\ElasticaBundle\Finder\FinderInterface;
 
-class CachedElasticDataRetriever implements DataRetrieverInterface
+class CachedElasticOrmDataRetriever implements DataRetrieverInterface
 {
     /** @var FinderInterface $dataFinder */
     protected $dataFinder;

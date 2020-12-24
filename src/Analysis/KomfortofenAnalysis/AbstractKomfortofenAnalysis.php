@@ -2,22 +2,20 @@
 
 namespace App\Analysis\KomfortofenAnalysis;
 
+use App\Pollution\DataFinder\FinderInterface;
 use App\Pollution\Pollutant\PollutantInterface;
 use FOS\ElasticaBundle\Finder\PaginatedFinderInterface;
 
 abstract class AbstractKomfortofenAnalysis implements KomfortofenAnalysisInterface
 {
-    /** @var float $minSlope */
-    protected $minSlope = 50.0;
+    protected float $minSlope = 1.0;
 
-    /** @var float $maxSlope */
-    protected $maxSlope = 300.0;
+    protected float $maxSlope = 300.0;
 
     /** @var PollutantInterface $pollutant */
     protected $pollutant;
 
-    /** @var PaginatedFinderInterface $finder */
-    protected $finder;
+    protected FinderInterface $finder;
 
     /** @var \DateTimeInterface $fromDateTime */
     protected $fromDateTime;
@@ -25,10 +23,9 @@ abstract class AbstractKomfortofenAnalysis implements KomfortofenAnalysisInterfa
     /** @var \DateTimeInterface $untilDateTime */
     protected $untilDateTime;
 
-    /** @var KomfortofenModelFactoryInterface $komfortofenModelFactory */
-    protected $komfortofenModelFactory;
+    protected KomfortofenModelFactoryInterface $komfortofenModelFactory;
 
-    public function __construct(PaginatedFinderInterface $finder, KomfortofenModelFactoryInterface $komfortofenModelFactory)
+    public function __construct(FinderInterface $finder, KomfortofenModelFactoryInterface $komfortofenModelFactory)
     {
         $this->finder = $finder;
         $this->komfortofenModelFactory = $komfortofenModelFactory;

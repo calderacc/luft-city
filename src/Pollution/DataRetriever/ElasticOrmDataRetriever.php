@@ -2,25 +2,18 @@
 
 namespace App\Pollution\DataRetriever;
 
-use App\Entity\Data;
 use App\Entity\Station;
-use App\Pollution\DataFinder\ElasticFinder;
-use App\Pollution\StationCache\StationCacheInterface;
 use Caldera\GeoBasic\Coord\CoordInterface;
-use Elastica\Query;
-use Elastica\Result;
-use Elastica\SearchableInterface;
+use FOS\ElasticaBundle\Finder\FinderInterface;
 
-class ElasticDataRetriever implements DataRetrieverInterface
+class ElasticOrmDataRetriever implements DataRetrieverInterface
 {
-    protected StationCacheInterface $stationCache;
+    /** @var FinderInterface $dataFinder */
+    protected $dataFinder;
 
-    protected ElasticFinder $finder;
-
-    public function __construct(ElasticFinder $finder, StationCacheInterface $stationCache)
+    public function __construct(FinderInterface $dataFinder)
     {
-        $this->finder = $finder;
-        $this->stationCache = $stationCache;
+        $this->dataFinder = $dataFinder;
     }
 
     public function retrieveDataForCoord(CoordInterface $coord, int $pollutantId, \DateTime $fromDateTime = null, \DateInterval $dateInterval = null, float $maxDistance = 20.0, int $maxResults = 750): array
@@ -46,8 +39,7 @@ class ElasticDataRetriever implements DataRetrieverInterface
         $boolQuery = new \Elastica\Query\BoolQuery();
         $boolQuery
             ->addMust($pollutantQuery)
-            ->addMust($stationQuery)
-        ;
+            ->addMust($stationQuery);
 
         if ($fromDateTime && $dateInterval) {
             $untilDateTime = clone $fromDateTime;
@@ -80,6 +72,6 @@ class ElasticDataRetriever implements DataRetrieverInterface
 
         $query->setSize($maxResults);
 
-        return $this->finder->find($query);
+        return $this->dataFinder->find($query);
     }
 }

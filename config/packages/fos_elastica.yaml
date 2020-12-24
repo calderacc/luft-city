@@ -43,6 +43,7 @@ fos_elastica:
                             type: nested
                             properties:
                                 id: ~
+                                stationCode: ~
                                 pin:
                                     type: geo_point
                                 untilDate:

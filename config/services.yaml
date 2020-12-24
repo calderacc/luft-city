@@ -48,7 +48,8 @@ services:
 
     App\Pollution\DataRetriever\DataRetrieverInterface:
         #alias: App\Pollution\DataRetriever\CachedElasticDataRetriever
-        alias: App\Pollution\DataRetriever\ChainedDataRetriever
+        #alias: App\Pollution\DataRetriever\ChainedDataRetriever
+        alias: App\Pollution\DataRetriever\ElasticDataRetriever
 
     App\Pollution\PollutantFactoryStrategy\PollutantFactoryStrategyInterface:
         alias: App\Pollution\PollutantFactoryStrategy\LuftdatenPollutantFactoryStrategy
@@ -56,11 +57,11 @@ services:
     App\Pollution\PollutionDataFactory\PollutionDataFactoryInterface:
         alias: App\Pollution\PollutionDataFactory\PollutionDataFactory
 
-    App\Pollution\DataRetriever\ElasticDataRetriever:
+    App\Pollution\DataRetriever\ElasticOrmDataRetriever:
         arguments:
             $dataFinder: '@fos_elastica.finder.air_data.data'
 
-    App\Pollution\DataRetriever\CachedElasticDataRetriever:
+    App\Pollution\DataRetriever\CachedElasticOrmDataRetriever:
         arguments:
             $dataFinder: '@fos_elastica.finder.air_station.station'
 
@@ -77,7 +78,8 @@ services:
 
     App\Pollution\DataPersister\PersisterInterface:
         #alias: App\Pollution\DataPersister\CachePersister
-        alias: App\Pollution\DataPersister\OrmPersister
+        #alias: App\Pollution\DataPersister\OrmPersister
+        alias: App\Pollution\DataPersister\ElasticPersister
         #alias: App\Pollution\DataPersister\CacheOrmPersister
 
     App\Producer\Value\RabbitValueProducer:
@@ -89,10 +91,10 @@ services:
             $producer: '@old_sound_rabbit_mq.luft_value_producer'
 
     App\Producer\Value\ValueProducerInterface:
-        #alias: App\Producer\Value\CacheValueProducer
+        alias: App\Producer\Value\ElasticValueProducer
         #alias: App\Producer\Value\CacheValueProducer
         #alias: App\Producer\Value\CacheOrmValueProducer
-        alias: App\Producer\Value\CacheRabbitValueProducer
+        #alias: App\Producer\Value\CacheRabbitValueProducer
 
     App\Pollution\PollutionDataFactory\HistoryDataFactory:
         arguments:
@@ -110,3 +112,14 @@ services:
 
     App\DataPurger\DataPurgerInterface:
         alias: App\DataPurger\FastDataPurger
+
+    App\Pollution\DataFinder\ElasticFinder:
+        arguments:
+            $searchable: '@fos_elastica.index.air_data.data'
+
+    App\Pollution\DataPersister\ElasticPersister:
+        arguments:
+            $index: '@fos_elastica.index.air_data'
+
+    App\Pollution\DataFinder\FinderInterface:
+        alias: App\Pollution\DataFinder\ElasticFinder

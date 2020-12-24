@@ -28,22 +28,6 @@ class FireworksModelFactory implements FireworksModelFactoryInterface
             }
         }
 
-        return $this->sortResultList($resultList);
-    }
-
-    /**
-     * @TODO this should be done in elasticsearch
-     */
-    protected function sortResultList(array $resultList = []): array
-    {
-        usort($resultList, function(FireworksModel $a, FireworksModel $b): int
-        {
-            if ($a->getData()->getDateTime() === $b->getData()->getDateTime()) {
-                return 0;
-            }
-            return ($a->getData()->getDateTime() > $b->getData()->getDateTime()) ? -1 : 1;
-        });
-
         return $resultList;
     }
 }
